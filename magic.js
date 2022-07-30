@@ -25,7 +25,6 @@ const getNotesFromLocalStorage = () => {
 const notes = getNotesFromLocalStorage() || []
 
 const deleteNote = (id) => {
-    console.log(id)
     const note = notes.findIndex(note => note.id === id)
     notes.splice(note, 1)
     saveNotesInLocalStorage(notes)
@@ -33,6 +32,10 @@ const deleteNote = (id) => {
 }
 
 const addNote = (note) => {
+    if (note.title.trim() === '' || note.text.trim() === '') {
+        alert('Please enter a title and text')
+        return
+    }
     notes.push(note)
     saveNotesInLocalStorage(notes)
     renderNotes()
@@ -56,7 +59,6 @@ document.querySelector('form').addEventListener('submit', (e) => {
 const renderNotes = () => {
     const notesContainer = document.querySelector(".notes")
     notesContainer.innerHTML = ""
-    console.log(notes)
     notes.forEach(note => {
         const noteHTML = noteTemplate(note)
         const noteDiv = document.createElement('div')

@@ -23,7 +23,7 @@ button {
     font-size: 18px;
     font-weight: bold;
     background-color: beige;
-    color: coral;
+    color: rgb(97, 48, 30);;
     outline: none;
     border: none;
     padding: 10px 0px;
@@ -43,7 +43,7 @@ button {
     font-size: 18px;
     font-weight: bold;
     background-color: rgb(245, 245, 236);
-    color: coral;
+    color: rgb(97, 48, 30);;
     outline: none;
     border: 2px solid rgb(150, 165, 109);
     padding: 20px;
@@ -59,11 +59,11 @@ button {
 
 .delete, .cancel {
     width: 48%;
-    border: 2px solid coral;
+    border: 2px solid rgb(97, 48, 30);
 }
 
 .delete:hover {
-    background-color: coral;
+    background-color: rgb(97, 48, 30);;
     color: white;
 }
 
@@ -73,7 +73,7 @@ button {
 }
 
 .edit:hover {
-    background-color: rgb(185, 204, 198);
+    background-color: rgb(60, 65, 63);
     color: white;
 }
 
@@ -96,7 +96,7 @@ body {
     width: 100%;
     max-width: 960px;
     background-color: rgb(245, 245, 236);
-    border: 2px solid coral;
+    border: 2px solid rgb(97, 48, 30);;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -129,3 +129,16 @@ textarea {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
 }
+
+#save {
+    background-color: #283;
+    color: white;
+}
+
+
+/* on devices screen width less than 1000 px */
+@media screen and (max-width: 1000px) {
+    .container, .modal, .note, .modal-content {
+      max-width: 90%;
+    }
+  }

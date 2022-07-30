@@ -12,7 +12,10 @@
     <div class="container">
         <h1>Notes</h1>
         <form>
-            <input type="text" placeholder="Title">
+            <label for="title">Title
+            <input id="title" type="text" name="title">
+        </label>
+            <label for="note-text-area">Content</label>
             <textarea name="note" id="note-text-area" cols="30" rows="10"></textarea>
             <button type="submit" id="save">Save</button>
         </form>
