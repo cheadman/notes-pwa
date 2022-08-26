@@ -1,0 +1,16 @@
+{
+  "name": "jenk-cy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "test:gui": "cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^10.6.0",
+    "live-server": "1.2.2"
+  }
+}
