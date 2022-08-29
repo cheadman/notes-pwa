@@ -5,9 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 git 'git@github.com:cheadman/notes-pwa.git'
-                sh "npm install"
-                sh "npm start"
-                sh "npm test"
+                // sh "npm install"
+                // sh "npm start"
+                // sh "npm test"
             }
 
             post {
