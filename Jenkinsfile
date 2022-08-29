@@ -20,8 +20,8 @@ pipeline {
         stage('Testing') {
             steps{
                 sh 'npm install'
-                sh 'npm start'
-                sh 'npx cypress run --browser ${BROWSER} --spec ${SPEC}'
+                sh 'npm start &'
+                sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
             }
             post {
                 success {
