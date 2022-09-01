@@ -17,46 +17,33 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('build and Test') {
             parallel {
                 stage('one') {
                     agent {
-                        label 'controller'
+                        label 'linux'
                     }
                     steps {
-                        echo 'installing'
-                        sh 'npm install'
-                        echo 'starting'
-                        sh 'npm start &'
-                        echo 'testing'
-                        sh 'curl localhost:8085'
-                        sh "npx cypress run --browser ${BROWSER}"
-                        // sh 'node_modules/cypress/bin/cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
+                        sh """
+                        x=hello
+                        echo x is $x
+                        """
+                        sh 'echo x is $x'
+                        // sh 'npm install'
+                        // sh 'npm start &'
+                        // sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
                     }
                 }
-                stage('two') {
-                    agent {
-                        label 'controller'
-                    }
-                    steps {
-                        echo 'installing'
-                        sh 'npm install'
-                        echo 'starting'
-                        sh 'npm start &'
-                        echo 'testing'
-                        sh 'curl localhost:8085'
-                        sh "npx cypress run --browser ${BROWSER}"
-                        // sh 'node_modules/cypress/bin/cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
-                    }
-                }
-            }
-            post {
-                success {
-                    echo 'done'
-                }
-                unsuccessful {
-                    echo 'fail'
-                }
+                // stage('two') {
+                //     agent {
+                //         label 'linux'
+                //     }
+                //     steps {
+                //         sh 'npm install'
+                //         sh 'npm start &'
+                //         sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
+                //     }
+                // }
             }
         }
 
