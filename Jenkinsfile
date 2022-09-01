@@ -34,7 +34,7 @@ pipeline {
                         // sh 'node_modules/cypress/bin/cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
                     }
                 }
-                stage('one') {
+                stage('two') {
                     agent {
                         label 'linux'
                     }
