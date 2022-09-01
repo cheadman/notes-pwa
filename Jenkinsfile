@@ -56,15 +56,15 @@ pipeline {
                         sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
                     }
                 }
-                stage('two') {
-                    agent {
-                        label 'linux'
-                    }
-                    steps {
-                        sh 'npm install'
-                        sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
-                    }
-                }
+                // stage('two') {
+                //     agent {
+                //         label 'linux'
+                //     }
+                //     steps {
+                //         sh 'npm install'
+                //         sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+                //     }
+                // }
             }
             post {
                 success {
