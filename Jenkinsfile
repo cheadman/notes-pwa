@@ -16,21 +16,53 @@ pipeline {
             }
         }
 
-        stage('Testing') {
+        // stage('Testing') {
+        //     parallel {
+        //         stage('build') {
+        //             agent { label '*'}
+        //             stages {
+        //                 stage('one') {
+        //                     sh 'npm install'
+        //                     sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+        //                 }
+        //             }
+        //             agent { label '*'}
+        //             stages {
+        //                 stage('two') {
+        //                     sh 'npm install'
+        //                     sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     post {
+        //         success {
+        //             echo 'done'
+        //         }
+        //         unsuccessful {
+        //             echo 'fail'
+        //         }
+        //     }
+        // }
+
+        stage('Run Tests') {
             parallel {
-                stage('build') {
-                    agent { label}
-                    stages {
-                        stage('one') {
-                            sh 'npm install'
-                            sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
-                        }
+                stage('one') {
+                    agent {
+                        label 'linux'
                     }
-                    stages {
-                        stage('two') {
-                            sh 'npm install'
-                            sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
-                        }
+                    steps {
+                        sh 'npm install'
+                        sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+                    }
+                }
+                stage('two') {
+                    agent {
+                        label 'linux'
+                    }
+                    steps {
+                        sh 'npm install'
+                        sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
                     }
                 }
             }
