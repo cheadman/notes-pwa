@@ -21,7 +21,7 @@ pipeline {
             parallel {
                 stage('one') {
                     agent {
-                        label 'linux'
+                        label 'controller'
                     }
                     steps {
                         echo 'installing'
@@ -36,7 +36,7 @@ pipeline {
                 }
                 stage('two') {
                     agent {
-                        label 'linux'
+                        label 'controller'
                     }
                     steps {
                         echo 'installing'
