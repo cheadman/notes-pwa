@@ -26,7 +26,9 @@ pipeline {
                     steps {
                         echo 'installing'
                         sh 'npm install'
-                        echo 'running'
+                        echo 'starting'
+                        sh 'npm start &'
+                        echo 'testing'
                         sh "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC}"
                     }
                 }
