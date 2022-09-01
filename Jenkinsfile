@@ -29,7 +29,7 @@ pipeline {
                         echo 'starting'
                         sh 'npm start &'
                         echo 'testing'
-
+                        echo "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER} "
                         sh "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER} "
                     }
                 }
