@@ -49,7 +49,7 @@ pipeline {
             parallel {
                 stage('one') {
                     agent {
-                        label 'linux'
+                        label 'controller'
                     }
                     steps {
                         sh 'npm install'
