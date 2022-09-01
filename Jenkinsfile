@@ -30,7 +30,7 @@ pipeline {
                         sh 'npm start &'
                         echo 'testing'
                         sh 'curl localhost:8085'
-                        npx "cypress run --browser ${BROWSER}"
+                        sh "npx cypress run --browser ${BROWSER}"
                         // sh 'node_modules/cypress/bin/cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
                     }
                 }
@@ -45,7 +45,7 @@ pipeline {
                         sh 'npm start &'
                         echo 'testing'
                         sh 'curl localhost:8085'
-                        npx "cypress run --browser ${BROWSER}"
+                        sh "npx cypress run --browser ${BROWSER}"
                         // sh 'node_modules/cypress/bin/cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
                     }
                 }
