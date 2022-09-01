@@ -21,7 +21,7 @@ pipeline {
             parallel {
                 stage('one') {
                     agent {
-                        label 'controller'
+                        label 'linux'
                     }
                     steps {
                         echo 'installing'
@@ -30,18 +30,25 @@ pipeline {
                         sh 'npm start &'
                         echo 'testing'
                         sh 'curl localhost:8085'
-                        sh 'node_modules/cypress/bin/cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
+                        npx cypress run
+                        // sh 'node_modules/cypress/bin/cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
                     }
                 }
-                // stage('two') {
-                //     agent {
-                //         label 'linux'
-                //     }
-                //     steps {
-                //         sh 'npm install'
-                //         sh "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC}"
-                //     }
-                // }
+                stage('one') {
+                    agent {
+                        label 'linux'
+                    }
+                    steps {
+                        echo 'installing'
+                        sh 'npm install'
+                        echo 'starting'
+                        sh 'npm start &'
+                        echo 'testing'
+                        sh 'curl localhost:8085'
+                        npx cypress run
+                        // sh 'node_modules/cypress/bin/cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
+                    }
+                }
             }
             post {
                 success {
