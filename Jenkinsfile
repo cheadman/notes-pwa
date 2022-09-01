@@ -9,39 +9,41 @@ pipeline {
     options {
         ansiColor('xterm')
     }
+    stages {
 
-    stage('Build') {
-        steps {
-            echo 'building the app'
+        stage('Build') {
+            steps {
+                echo 'building the app'
+            }
         }
-    }
 
-    stage('Testing') {
-        parallel {
-            stages {
-                stage('one') {
-                    sh 'npm install'
-                    sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+        stage('Testing') {
+            parallel {
+                stages {
+                    stage('one') {
+                        sh 'npm install'
+                        sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+                    }
+                    stage('two') {
+                        sh 'npm install'
+                        sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+                    }
                 }
-                stage('two') {
-                    sh 'npm install'
-                    sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+            }
+            post {
+                success {
+                    echo 'done'
+                }
+                unsuccessful {
+                    echo 'fail'
                 }
             }
         }
-        post {
-            success {
-                echo 'done'
-            }
-            unsuccessful {
-                echo 'fail'
-            }
-        }
-    }
 
-    stage('Deploying') {
-        steps {
-            echo 'deploying'
+        stage('Deploying') {
+            steps {
+                echo 'deploying'
+            }
         }
     }
 }
