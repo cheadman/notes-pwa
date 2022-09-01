@@ -28,8 +28,8 @@ pipeline {
                         sh 'npm install'
                         echo 'starting'
                         sh 'npm start &'
-                        echo 'testing'
                         echo "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER} "
+                        echo 'testing'
                         sh "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER} "
                     }
                 }
