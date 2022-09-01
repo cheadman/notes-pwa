@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'building the app'
-                echo "the build url is ${BUILD_URL}"
+                echo "the build number is ${BUILD_NUMBER}"
             }
         }
 
@@ -24,7 +24,9 @@ pipeline {
                         label 'controller'
                     }
                     steps {
+                        echo 'installing'
                         sh 'npm install'
+                        echo 'running'
                         sh "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC}"
                     }
                 }
