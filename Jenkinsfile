@@ -29,6 +29,7 @@ pipeline {
                         echo 'starting'
                         sh 'npm start &'
                         echo 'testing'
+                        sh curl 'localhost:8085'
                         sh 'npx cypress run --record --parallel --key $CYPRESS_KEY'+" --browser ${BROWSER} --spec ${SPEC} --ci-build-id ${BUILD_NUMBER}"
                     }
                 }
