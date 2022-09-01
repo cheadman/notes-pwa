@@ -13,37 +13,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'building the app'
+                echo "the build url is ${BUILD_URL}"
             }
         }
-
-        // stage('Testing') {
-        //     parallel {
-        //         stage('build') {
-        //             agent { label '*'}
-        //             stages {
-        //                 stage('one') {
-        //                     sh 'npm install'
-        //                     sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
-        //                 }
-        //             }
-        //             agent { label '*'}
-        //             stages {
-        //                 stage('two') {
-        //                     sh 'npm install'
-        //                     sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     post {
-        //         success {
-        //             echo 'done'
-        //         }
-        //         unsuccessful {
-        //             echo 'fail'
-        //         }
-        //     }
-        // }
 
         stage('Run Tests') {
             parallel {
@@ -53,7 +25,7 @@ pipeline {
                     }
                     steps {
                         sh 'npm install'
-                        sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+                        sh "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC}"
                     }
                 }
                 // stage('two') {
@@ -62,7 +34,7 @@ pipeline {
                 //     }
                 //     steps {
                 //         sh 'npm install'
-                //         sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+                //         sh "npx cypress run --record parallel --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC}"
                 //     }
                 // }
             }
