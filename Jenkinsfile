@@ -24,26 +24,33 @@ pipeline {
                         label 'linux'
                     }
                     steps {
+                        sh 'npm install'
+                        sh 'npm start &'
                         sh '''
-                        x=hello
-                        echo x is $x
+                        totalfiles=`find cypress/e2e -type f -name "*.cy.js" | wc -l`
+                        half=$((totalfiles/2))
+                        firstHalf=`find cypress/e2e -type f -name "*.cy.js" | head -n $half`
+                        echo $firstHalf
+                        npx cypress run --spec $firstHalf
                         '''
-                        sh 'echo x is $x'
-                        // sh 'npm install'
-                        // sh 'npm start &'
-                        // sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
                     }
                 }
-                // stage('two') {
-                //     agent {
-                //         label 'linux'
-                //     }
-                //     steps {
-                //         sh 'npm install'
-                //         sh 'npm start &'
-                //         sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
-                //     }
-                // }
+                stage('two') {
+                    agent {
+                        label 'linux'
+                    }
+                    steps {
+                        sh 'npm install'
+                        sh 'npm start &'
+                        sh '''
+                        totalfiles=`find cypress/e2e -type f -name "*.cy.js" | wc -l`
+                        half=$((totalfiles/2))
+                        secondHalf=`find cypress/e2e -type f -name "*.cy.js" | head -n -$half`
+                        echo $secondHalf
+                        npx cypress run --spec $secondHalf
+                        '''
+                    }
+                }
             }
         }
 
