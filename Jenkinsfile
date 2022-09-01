@@ -24,10 +24,10 @@ pipeline {
                         label 'linux'
                     }
                     steps {
-                        sh """
+                        sh '''
                         x=hello
                         echo x is $x
-                        """
+                        '''
                         sh 'echo x is $x'
                         // sh 'npm install'
                         // sh 'npm start &'
