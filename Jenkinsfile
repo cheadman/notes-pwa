@@ -18,10 +18,17 @@ pipeline {
         }
 
         stage('Testing') {
-            steps{
-                sh 'npm install'
-                // sh 'npm start &'
-                sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
+            parallel {
+                stages{
+                    stage('one'){
+                        sh 'npm install'
+                        sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+                    }
+                    stage('two'){
+                        sh 'npm install'
+                        sh "npx cypress run --record --key $CYPRESS_KEY --browser ${BROWSER} --spec ${SPEC} --ci-build-id $BUILD_URL"
+                    }
+                }
             }
             post {
                 success {
