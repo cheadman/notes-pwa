@@ -27,10 +27,7 @@ pipeline {
                         sh 'npm install'
                         sh 'npm start &'
                         sh '''
-                        totalfiles=`find cypress/e2e -type f -name "*.cy.js" | wc -l`
-                        half=$((totalfiles/2))
-                        firstHalf=`find cypress/e2e -type f -name "*.cy.js" | head -n $half`
-                        echo $firstHalf
+                        firstHalf=`./node_modules/split-files/splitFiles.js "cypress/e2e" ".*\.cy\.js$" 2 0`
                         npx cypress run --spec $firstHalf
                         '''
                     }
@@ -43,11 +40,8 @@ pipeline {
                         sh 'npm install'
                         sh 'npm start &'
                         sh '''
-                        totalfiles=`find cypress/e2e -type f -name "*.cy.js" | wc -l`
-                        half=$((totalfiles/2))
-                        secondHalf=`find cypress/e2e -type f -name "*.cy.js" | head -n -$half`
-                        echo $secondHalf
-                        npx cypress run --spec $secondHalf
+                        firstHalf=`./node_modules/split-files/splitFiles.js "cypress/e2e" ".*\.cy\.js$" 2 1`
+                        npx cypress run --spec $firstHalf
                         '''
                     }
                 }
