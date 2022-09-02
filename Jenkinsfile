@@ -26,10 +26,10 @@ pipeline {
                     steps {
                         sh 'npm install'
                         sh 'npm start &'
-                        sh '''
-                        firstHalf=`./node_modules/split-files/splitFiles.js "cypress/e2e" ".*\.cy\.js$" 2 0`
+                        sh """
+                        firstHalf=`./node_modules/split-files/splitFiles.js 'cypress/e2e' '.*\.cy\.js$' 2 0`
                         npx cypress run --spec $firstHalf
-                        '''
+                        """
                     }
                 }
                 stage('two') {
@@ -39,10 +39,10 @@ pipeline {
                     steps {
                         sh 'npm install'
                         sh 'npm start &'
-                        sh '''
-                        firstHalf=`./node_modules/split-files/splitFiles.js "cypress/e2e" ".*\.cy\.js$" 2 1`
+                        sh """
+                        firstHalf=`./node_modules/split-files/splitFiles.js 'cypress/e2e' '.*\.cy\.js$' 2 1`
                         npx cypress run --spec $firstHalf
-                        '''
+                        """
                     }
                 }
             }
