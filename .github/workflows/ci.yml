@@ -17,7 +17,7 @@ jobs:
         uses: cypress-io/github-action@v4.2.0
         with:
           install: false
-          start: yarn start:ci
+          start: npm start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
           browser: chrome
@@ -25,4 +25,4 @@ jobs:
           group: 'UI - Chrome'
           spec: $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
       - name: Echo stuff
-        run: echo $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
+        run: echo the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
