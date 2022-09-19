@@ -3,14 +3,26 @@ name: Cypress Tests
 on: [push]
 
 jobs:
-  cypress-run:
+  ui-chrome-tests:
     runs-on: ubuntu-latest
+    container: cypress/browsers:node12.18.3-chrome87-ff82
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v4.2.0 # use the explicit version number
+      - name: 'UI Tests - Chrome'
+        uses: cypress-io/github-action@v4.2.0
         with:
-          start: npm start
+          install: false
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          group: 'UI - Chrome'
+          spec: $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
+      - name: Echo stuff
+        run: echo $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
