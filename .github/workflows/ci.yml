@@ -26,3 +26,5 @@ jobs:
       #     spec: $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
       - name: Echo stuff
         run: echo the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
+        run: ${{ matrix.containers }}
+        run: echo the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2) ${{ matrix.containers }}
