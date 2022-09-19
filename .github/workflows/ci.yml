@@ -27,6 +27,6 @@ jobs:
       - name: install
         run: npm i
       - name: Echo stuff
-        run: echo the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
-        run: ${{ matrix.containers }}
-        run: echo the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2) ${{ matrix.containers }}
+        echo: the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
+        echo: ${{ matrix.containers }}
+        echo: the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2) ${{ matrix.containers }}
