@@ -13,6 +13,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: GetSpecs
+        run: echo "::set-output name=action_fruit::strawberry"
+      - name: install
+        run: npm i
       # - name: 'UI Tests - Chrome'
       #   uses: cypress-io/github-action@v4.2.0
       #   with:
@@ -24,11 +28,9 @@ jobs:
       #     record: true
       #     group: 'UI - Chrome'
       #     spec: $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
-      - name: install
-        run: npm i
       - name: Echo stuff
         run: |
             echo 'the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)'
             echo '${{ matrix.containers }}'
-            echo 'the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2) ${{ matrix.containers }}'       
+            echo "the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 3 ${{ matrix.containers }})"
         
