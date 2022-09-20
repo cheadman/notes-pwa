@@ -13,6 +13,7 @@
   "devDependencies": {
     "cypress": "^10.6.0",
     "live-server": "^1.2.2",
-    "split-files": "github:cheadman/split-files"
+    "split-files": "github:cheadman/split-files",
+    "wait-on": "^6.0.1"
   }
 }

@@ -13,11 +13,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: GetSpecs
-        run: echo "::set-output name=action_fruit::strawberry"
       - name: install
         run: npm i
+      - name: start
+        # best practice is to use the wait-on node module. read more at https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
+        npm start & npx wait-on http://localhost:8085 # use your application's port here
       - name: test
         # note that for this step to work, your cypress installation would need to install a simple node module I wrote. "npm i github:cheadman/split-files --save-dev"
+        # you could also write your own module to fit your needs. read usage https://github.com/cheadman/split-files
         run: 'npx cypress run --spec=$(npx split-files "cypress/e2e" ".*\.cy\.js$" 3 ${{ matrix.containers }})'
         
