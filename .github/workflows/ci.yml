@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3]
+        containers: [0, 1, 2]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -17,20 +17,6 @@ jobs:
         run: echo "::set-output name=action_fruit::strawberry"
       - name: install
         run: npm i
-      # - name: 'UI Tests - Chrome'
-      #   uses: cypress-io/github-action@v4.2.0
-      #   with:
-      #     install: false
-      #     start: npm start
-      #     wait-on: 'http://localhost:8085'
-      #     wait-on-timeout: 120
-      #     browser: chrome
-      #     record: true
-      #     group: 'UI - Chrome'
-      #     spec: $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)
-      - name: Echo stuff
-        run: |
-            echo 'the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 5 2)'
-            echo '${{ matrix.containers }}'
-            echo "the info is $(npx split-files 'cypress/e2e' '.*\.cy\.js$' 3 ${{ matrix.containers }})"
+      - name: test
+        run: "npx cypress run --spec=$(npx split-files 'cypress/e2e' '.*\.cy\.js$' 3 ${{ matrix.containers }})" # note that for this step to work, your cypress installation would need to 
         
