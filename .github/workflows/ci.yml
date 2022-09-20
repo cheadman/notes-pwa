@@ -18,5 +18,6 @@ jobs:
       - name: install
         run: npm i
       - name: test
-        run: "npx cypress run --spec=$(npx split-files 'cypress/e2e' '.*\.cy\.js$' 3 ${{ matrix.containers }})" # note that for this step to work, your cypress installation would need to 
+        # note that for this step to work, your cypress installation would need to install a simple node module I wrote. "npm i github:cheadman/split-files --save-dev"
+        run: "npx cypress run --spec=$(npx split-files 'cypress/e2e' '.*\.cy\.js$' 3 ${{ matrix.containers }})" 
         
