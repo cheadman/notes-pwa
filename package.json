@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "bash -e npx live-server . --port=8085",
+    "start": "bash npx live-server . --port=8085",
     "test": "cypress run",
     "test:gui": "cypress open"
   },
