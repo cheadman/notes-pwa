@@ -22,6 +22,6 @@ phases:
     run-as: root
     on-failure: ABORT
     commands:
-      - live-server . --port=8085 &
+      - ./node_modules/live-server/live-server.js . --port=8085 &
       - npx cypress run
       
