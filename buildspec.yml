@@ -14,12 +14,11 @@ phases:
     run-as: root
     on-failure: ABORT
     runtime-versions:
-      runtime: version
-      runtime: version
+      runtime: nodejs
     commands:
-      - sudo yum install -y gcc-c++ make 
-      - curl -sL https://rpm.nodesource.com/setup_18.x | sudo -E bash - 
-      - sudo yum install -y nodejs
+      # - sudo yum install -y gcc-c++ make 
+      # - curl -sL https://rpm.nodesource.com/setup_18.x | sudo -E bash - 
+      # - sudo yum install -y nodejs
       - npm i
   post_build:
     run-as: root
