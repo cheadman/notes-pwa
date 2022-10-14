@@ -14,7 +14,7 @@ phases:
     run-as: root
     on-failure: ABORT
     runtime-versions:
-      nodejs: 16
+      nodejs: 12
     commands:
       - npm i
   post_build:
