@@ -1,0 +1,29 @@
+version: 0.2
+
+run-as: root
+
+proxy:
+  upload-artifacts: no
+  logs: yes
+
+batch:
+  fast-fail: false
+        
+phases:
+  install:
+    run-as: root
+    on-failure: ABORT
+    runtime-versions:
+      runtime: version
+      runtime: version
+    commands:
+      - sudo yum install -y gcc-c++ make 
+      - curl -sL https://rpm.nodesource.com/setup_18.x | sudo -E bash - 
+      - sudo yum install -y nodejs
+      - npm i
+  test:
+    run-as: root
+    on-failure: ABORT
+    commands:
+      - npm start &
+      - npx cypress run
