@@ -17,9 +17,11 @@ phases:
       nodejs: 12
     commands:
       - npm i
+      - yum install -y xorg-x11-server-Xvfb gtk2-devel gtk3-devel libnotify-devel GConf2 nss libXScrnSaver alsa-lib
   post_build:
     run-as: root
     on-failure: ABORT
     commands:
       - npm start &
       - npx cypress run
+      
